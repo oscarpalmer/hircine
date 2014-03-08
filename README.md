@@ -12,7 +12,6 @@ A selector engine.
 
 - JSDoc.
 - Tests.
-- Ender.
 
 ## License
 
