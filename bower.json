@@ -1,0 +1,10 @@
+{
+  "description": "A selector engine.",
+  "ignore": [
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "hircine.min.js",
+  "name": "party",
+  "version": "0.1.0"
+}
