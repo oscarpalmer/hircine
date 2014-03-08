@@ -1,5 +1,11 @@
 (function(name, context, definition){
-  context[name] = definition();
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = definition();
+  } else if (typeof define === "function" && define.amd) {
+    define(definition);
+  } else {
+    context[name] = definition();
+  }
 })("hircine", this, function(){
   var
   win        = this,
