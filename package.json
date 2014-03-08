@@ -1,0 +1,18 @@
+{
+  "author": "Oscar Palmér <opalmer@me.com> (http://opalmer.me)",
+  "description": "A selector engine.",
+  "files": ["hircine.js", "hircine.min.js"],
+  "homepage": "http://git.io/hircine",
+  "jam": {
+    "main": "hircine.min.js"
+  },
+  "keywords": ["query", "selector engine"],
+  "license": "MIT",
+  "main": "hircine.js",
+  "name": "hircine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oscarpalmer/hircine.git"
+  },
+  "version": "0.1.0"
+}

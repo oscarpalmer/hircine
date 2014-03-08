@@ -12,7 +12,7 @@ A selector engine.
 
 - JSDoc.
 - Tests.
-- NPM, Jam, Ender...
+- Ender.
 
 ## License
 
