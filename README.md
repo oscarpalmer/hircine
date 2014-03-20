@@ -1,5 +1,7 @@
 # Hircine
 
+[![NPM version](https://badge.fury.io/js/hircine.png)](http://badge.fury.io/js/hircine)
+
 A tiny selector engine for awesome browsers.
 
 ## The name
