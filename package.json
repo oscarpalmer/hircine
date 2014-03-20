@@ -7,19 +7,19 @@
     "gulp-jshint": "*",
     "gulp-uglify": "*"
   },
-  "ender": "ender.js",
-  "files": ["ender.js", "hircine.js", "hircine.min.js"],
+  "ender": "src/ender.js",
+  "files": ["dist/hircine.js", "src/ender.js", "src/hircine.js"],
   "homepage": "http://git.io/hircine",
   "jam": {
-    "main": "hircine.min.js"
+    "main": "dist/hircine.js"
   },
   "keywords": ["ender", "query", "selector engine"],
   "license": "MIT",
-  "main": "hircine.js",
+  "main": "dist/hircine.js",
   "name": "hircine",
   "repository": {
     "type": "git",
     "url": "https://github.com/oscarpalmer/hircine.git"
   },
-  "version": "0.2.4"
+  "version": "0.3.0"
 }
