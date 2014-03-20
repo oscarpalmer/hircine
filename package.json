@@ -1,6 +1,12 @@
 {
   "author": "Oscar Palmér <opalmer@me.com> (http://opalmer.me)",
   "description": "A selector engine.",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-jshint": "*",
+    "gulp-uglify": "*"
+  },
   "ender": "ender.js",
   "files": ["ender.js", "hircine.js", "hircine.min.js"],
   "homepage": "http://git.io/hircine",
@@ -15,5 +21,5 @@
     "type": "git",
     "url": "https://github.com/oscarpalmer/hircine.git"
   },
-  "version": "0.2.3"
+  "version": "0.2.4"
 }

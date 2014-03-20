@@ -112,21 +112,21 @@
    * Check if object is a document.
    */
   function isDoc(obj) {
-    return typeof obj !== "undefined" && obj[nodeType] === 9;
+    return obj && obj[nodeType] === 9;
   }
 
   /**
    * Check if object is a node (element).
    */
   function isNode(obj) {
-    return typeof obj !== "undefined" && obj[nodeType] === 1;
+    return obj && obj[nodeType] === 1;
   }
 
   /**
    * Check if object is a window.
    */
   function isWindow(obj) {
-    return typeof obj !== "undefined" && obj === obj.window;
+    return obj && obj === obj.window;
   }
 
   /**
@@ -150,7 +150,7 @@
    * Check if object is like an array.
    */
   function likeArray(obj) {
-    return typeof obj !== "undefined" && (
+    return obj && (
            typeOf(obj) === "array" || (
            typeof obj !== "string" &&
            typeof obj[length] === "number" &&
