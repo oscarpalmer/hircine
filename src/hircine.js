@@ -10,14 +10,9 @@
   var
   win        = this,
   doc        = win.document,
-  getByClass = "getElementsByClassName",
-  getByTag   = "getElementsByTagName",
-  getByQSA   = "querySelectorAll",
-  length     = "length",
-  nodeType   = "nodeType",
   htmlString = /^\s*<(\w+|!)[^>]*>/,
   quickFind  = /^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/,
-  hircine;
+  Hircine;
 
   /**
    * Get elements by class name.
@@ -27,14 +22,14 @@
     results = [],
     elements;
 
-    if (context[getByClass]) {
-      return toArray(context[getByClass](klass));
+    if (context.getElementsByClassName) {
+      return toArray(context.getElementsByClassName(klass));
     }
 
-    elements = context[getByTag]("*");
+    elements = context.getElementsByTagName("*");
 
     each(elements, function(element) {
-      if (element.className.match(new RegExp("(\\s|^)" + klass + "(\\s|$)"))) {
+      if (element.className.match(new RegExp("(^|\\s)" + klass + "(\\s|$)"))) {
         results.push(element);
       }
     });
@@ -52,7 +47,7 @@
     context = isNode(context) ? context.ownerDocument : context;
     element = context.getElementById(id);
 
-    if (isNode(element) && element.parentNode && element.id === id) {
+    if (isNodeLike(element) && element.parentNode && element.id === id) {
       return [element];
     }
 
@@ -67,7 +62,7 @@
       return doc;
     } else if (typeof context === "string") {
       return hircine(context);
-    } else if (isDoc(context) || isNode(context) || likeArray(context)) {
+    } else if (isNodeLike(context)) {
       return context;
     }
 
@@ -79,8 +74,8 @@
    */
   function each(obj, fn, scope) {
     var
-    index  = 0,
-    langd = obj[length];
+    index = 0,
+    langd = obj.length;
 
     for (; index < langd; index++) {
       fn.call(scope || obj[index], obj[index], index, obj);
@@ -94,13 +89,13 @@
    */
   function htmlify(string) {
     var
-    html = doc.createElement("div"),
+    html    = doc.createElement("div"),
     results = [];
 
     html.innerHTML = string;
 
     each(html.childNodes, function(node) {
-      if (isNode(node)) {
+      if (isNodeLike(node)) {
         results.push(node);
       }
     });
@@ -109,33 +104,12 @@
   }
 
   /**
-   * Check if object is a document.
+   * Check if item exists in array.
    */
-  function isDoc(obj) {
-    return obj && obj[nodeType] === 9;
-  }
-
-  /**
-   * Check if object is a node (element).
-   */
-  function isNode(obj) {
-    return obj && obj[nodeType] === 1;
-  }
-
-  /**
-   * Check if object is a window.
-   */
-  function isWindow(obj) {
-    return obj && obj === obj.window;
-  }
-
-  /**
-   * Check if item already exists in object (array).
-   */
-  function indexOf(obj, item) {
+  function inArray(obj, item) {
     var
     index = 0,
-    langd = obj[length];
+    langd = obj.length;
 
     for (; index < langd; index++) {
       if (obj[index] === item) {
@@ -147,14 +121,21 @@
   }
 
   /**
+   * Check if object is a node (element).
+   */
+  function isNodeLike(obj) {
+    return obj && (obj.nodeType === 1 || obj.nodeType === 9 || obj === obj.window);
+  }
+
+  /**
    * Check if object is like an array.
    */
   function likeArray(obj) {
     return obj && (
-           typeOf(obj) === "array" || (
+           obj instanceof Array || (
            typeof obj !== "string" &&
-           typeof obj[length] === "number" &&
-           obj[length] - 1 in obj));
+           typeof obj.length === "number" &&
+           obj.length - 1 in obj));
   }
 
   /**
@@ -165,7 +146,7 @@
     results = [];
 
     each(obj, function(item) {
-      if (indexOf(results, item) !== true) {
+      if (inArray(results, item) !== true) {
         results.push(item);
       }
     });
@@ -174,18 +155,9 @@
   }
 
   /**
-   * Check type for object; somewhat better than typeof, but slightly slower.
-   */
-  function typeOf(variable) {
-    return ({}).toString.call(variable).replace(/^\[\w+\s(\w+)\]$/, "$1").toLowerCase();
-  }
-
-  /** */
-
-  /**
    * Find elements by selector and context.
    */
-  hircine = function(selector, context) {
+  Hircine = function(selector, context) {
     var
     results = [],
     match;
@@ -194,7 +166,7 @@
       return results;
     }
 
-    if (isDoc(selector) || isNode(selector) || isWindow(selector)) {
+    if (isNodeLike(selector)) {
       return [selector];
     }
 
@@ -211,7 +183,7 @@
       return toArray(results);
     }
 
-    if (typeof selector !== "string" || !isDoc(context) && !isNode(context)) {
+    if (typeof selector !== "string" || !isNodeLike(context)) {
       return results;
     }
 
@@ -223,7 +195,7 @@
       } else if (match[2]) {
         return byClass(context, match[2]);
       } else if (match[3]) {
-        return toArray(context[getByTag](match[3]));
+        return toArray(context.getElementsByTagName(match[3]));
       }
     }
 
@@ -231,12 +203,12 @@
       return htmlify(selector);
     }
 
-    if (context[getByQSA]) {
-      return toArray(context[getByQSA](selector));
+    if (context.querySelectorAll) {
+      return toArray(context.querySelectorAll(selector));
     }
 
     return results;
   };
 
-  return hircine;
+  return Hircine;
 });
