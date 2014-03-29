@@ -2,10 +2,9 @@
   "author": "Oscar Palmér <opalmer@me.com> (http://opalmer.me)",
   "description": "A selector engine.",
   "devDependencies": {
-    "gulp": "*",
-    "gulp-concat": "*",
-    "gulp-jshint": "*",
-    "gulp-uglify": "*"
+    "grunt": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*"
   },
   "ender": "src/ender.js",
   "files": ["dist/hircine.js", "src/ender.js", "src/hircine.js"],
@@ -15,11 +14,11 @@
   },
   "keywords": ["ender", "query", "selector engine"],
   "license": "MIT",
-  "main": "src/hircine.js",
+  "main": "dist/hircine.js",
   "name": "hircine",
   "repository": {
     "type": "git",
     "url": "https://github.com/oscarpalmer/hircine.git"
   },
-  "version": "0.4.0"
+  "version": "0.4.1"
 }
