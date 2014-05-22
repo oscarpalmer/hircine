@@ -44,7 +44,7 @@
     var
     element;
 
-    context = isNode(context) ? context.ownerDocument : context;
+    context = context.nodeType === 1 ? context.ownerDocument : context;
     element = context.getElementById(id);
 
     if (isNodeLike(element) && element.parentNode && element.id === id) {

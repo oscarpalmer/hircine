@@ -23,13 +23,14 @@
   },
   "testling": {
     "browsers": [
+      "android-browser/4.2",
       "chrome/20..latest",
       "firefox/10..latest",
       "ie/9..latest",
       "ipad/6",
       "iphone/6",
       "opera/10..latest",
-      "safari/latest"
+      "safari/5..latest"
     ],
     "html": "tests/index.html"
   },
