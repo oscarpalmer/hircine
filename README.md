@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/hircine.png)](http://badge.fury.io/js/hircine)
 
-A tiny selector engine for awesome browsers.
+A tiny selector engine for [awesome browsers](#browser-support).
 
 ## The name
 
@@ -25,10 +25,9 @@ elements = hircine("tag#id.class");
 
 Hircine is however less capable – it's just for fun and learning – and won't be able to handle super-crazy queries. Please check the [documentation for `querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document.querySelectorAll) if you want to know more.
 
-## Todo
+## Browser support
 
-- Tests.
-- JSDoc.
+[![Testling](https://ci.testling.com/oscarpalmer/hircine.png)](https://ci.testling.com/oscarpalmer/hircine)
 
 ## License
 
