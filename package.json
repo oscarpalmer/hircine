@@ -4,7 +4,8 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*"
+    "grunt-contrib-uglify": "*",
+    "tape": "~2.4.0"
   },
   "ender": "src/ender.js",
   "files": ["dist/hircine.js", "src/ender.js", "src/hircine.js"],
@@ -19,6 +20,18 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/oscarpalmer/hircine.git"
+  },
+  "testling": {
+    "browsers": [
+      "chrome/20..latest",
+      "firefox/10..latest",
+      "ie/9..latest",
+      "ipad/6",
+      "iphone/6",
+      "opera/10..latest",
+      "safari/latest"
+    ],
+    "html": "tests/index.html"
   },
   "version": "0.4.1"
 }
