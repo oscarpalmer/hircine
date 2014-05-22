@@ -30,7 +30,7 @@
       "ipad/6",
       "iphone/6",
       "opera/10..latest",
-      "safari/5..latest"
+      "safari/5.0.5..latest"
     ],
     "html": "tests/index.html"
   },
