@@ -1,1 +1,95 @@
-!function(a,b,c){"undefined"!=typeof module&&module.exports?module.exports=c():"function"==typeof define&&define.amd?define(c):b[a]=c()}("hircine",this,function(){function a(a,b){var d;return a=1===a.nodeType?a.ownerDocument:a,d=a.getElementById(b),c(d)&&d.parentNode&&d.id===b?[d]:[]}function b(a){return"undefined"==typeof a?h:"string"==typeof a?f(a):c(a)?a:h}function c(a){return a&&(1===a.nodeType||9===a.nodeType)}function d(a){return a&&"object"==typeof a&&"number"==typeof a.length}function e(a){for(var b=0,c=a.length,d=[];c>b;b++)-1===d.indexOf(a[b])&&d.push(a[b]);return d}var f,g=this,h=g.document,i=/^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/;return f=function(g,h){var j,k,l=[];if("undefined"==typeof g)return l;if(c(g)||g===g.window)return[g];if(d(g))return e(g);if(h=b(h),d(h)){for(j=0,k=h.length;k>j;j++)l=l.concat(f(g,h[j]));return e(l)}if(("string"==typeof g||c(h))===!1)return l;if(match=i.exec(g)){if(match[1])return a(h,match[1]);if(match[2]&&h.getElementsByClassName)return e(h.getElementsByClassName(match[2]));if(match[3])return e(h.getElementsByTagName(match[3]))}return h.querySelectorAll?e(h.querySelectorAll(g)):l}});
+(function() {
+  var Hircine, byId, defineContext, doc, isNodeLike, likeArray, quick, toArray;
+
+  doc = this.document;
+
+  quick = /^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/;
+
+  byId = function(context, id) {
+    var element;
+    context = context.nodeType === 1 ? context.ownerDocument : context;
+    element = context.getElementById(id);
+    if (isNodeLike(element) && element.parentNode && element.id === id) {
+      return [element];
+    } else {
+      return [];
+    }
+  };
+
+  defineContext = function(context) {
+    if (typeof context === "undefined") {
+      return doc;
+    } else if (typeof context === "string") {
+      return Hircine(context);
+    } else if (isNodeLike(context)) {
+      return context;
+    }
+    return doc;
+  };
+
+  isNodeLike = function(obj) {
+    return obj && (obj.nodeType === 1 || obj.nodeType === 9);
+  };
+
+  likeArray = function(obj) {
+    return obj && typeof obj === "object" && typeof obj.length === "number";
+  };
+
+  toArray = function(obj) {
+    var array, item, _i, _len;
+    array = [];
+    for (_i = 0, _len = obj.length; _i < _len; _i++) {
+      item = obj[_i];
+      if (array.indexOf(item) === -1) {
+        array.push(item);
+      }
+    }
+    return array;
+  };
+
+  Hircine = function(selector, context) {
+    var match, node, result, _i, _len;
+    if (typeof selector === "undefined") {
+      return [];
+    }
+    if (isNodeLike(selector) || selector === selector.window) {
+      return [selector];
+    }
+    if (likeArray(selector)) {
+      return selector;
+    }
+    context = defineContext(context);
+    if (likeArray(context)) {
+      result = [];
+      for (_i = 0, _len = context.length; _i < _len; _i++) {
+        node = context[_i];
+        result = result.concat(Hircine(selector, node));
+      }
+      return toArray(result);
+    }
+    if (typeof selector !== "string" || !isNodeLike(context)) {
+      return [];
+    }
+    if ((match = quick.exec(selector))) {
+      if (match[1]) {
+        return byId(context, match[1]);
+      }
+      if (match[2]) {
+        return toArray(context.getElementsByClassName(match[2]));
+      }
+      if (match[3]) {
+        return toArray(context.getElementsByTagName(match[3]));
+      }
+    }
+    return toArray(context.querySelectorAll(selector));
+  };
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = Hircine;
+  } else if (typeof define === "function" && define.amd) {
+    define(Hircine);
+  } else {
+    this.hircine = Hircine;
+  }
+
+}).call(this);
