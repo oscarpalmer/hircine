@@ -3,19 +3,20 @@
   "description": "A selector engine.",
   "devDependencies": {
     "grunt": "*",
+    "grunt-contrib-coffee": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
     "tape": "~2.4.0"
   },
-  "ender": "src/ender.js",
-  "files": ["dist/hircine.js", "src/ender.js", "src/hircine.js"],
+  "ender": "dist/ender.js",
+  "files": ["dist/hircine.min.js", "dist/ender.js"],
   "homepage": "http://git.io/hircine",
   "jam": {
-    "main": "dist/hircine.js"
+    "main": "dist/hircine.min.js"
   },
   "keywords": ["ender", "query", "selector engine"],
   "license": "MIT",
-  "main": "dist/hircine.js",
+  "main": "dist/hircine.min.js",
   "name": "hircine",
   "repository": {
     "type": "git",
