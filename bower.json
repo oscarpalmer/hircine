@@ -3,12 +3,12 @@
   "ignore": [
     "tests/",
     "src/ender.js",
-    "gruntfile.js",
+    "Gruntfile.js",
     "LICENSE",
     "package.json",
     "README.md"
   ],
-  "main": "dist/hircine.min.js",
+  "main": "dist/hircine.js",
   "name": "hircine",
-  "version": "0.7.0"
+  "version": "0.8.0"
 }
