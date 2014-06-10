@@ -9,6 +9,7 @@
 })("hircine", this, function(){
   var
   doc   = this.document,
+  array = [],
   quick = /^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/;
 
   /**
@@ -58,15 +59,15 @@
    */
   function toArray(obj) {
     var
-    array = [];
+    result = [];
 
-    [].forEach.call(obj, function(item) {
-      if (array.indexOf(item) === -1) {
-        array.push(item);
+    array.forEach.call(obj, function(item) {
+      if (result.indexOf(item) === -1) {
+        result.push(item);
       }
     });
 
-    return array;
+    return result;
   }
 
   /**

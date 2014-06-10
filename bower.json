@@ -10,5 +10,5 @@
   ],
   "main": "dist/hircine.js",
   "name": "hircine",
-  "version": "0.8.0"
+  "version": "0.8.1"
 }
