@@ -31,11 +31,11 @@
 
     for (; index < langd; index++) {
       if (elements[index].className.match(new RegExp("(^|\\s)" + klass + "(\\s|$)"))) {
-        results.push(elements[index]);
+        result.push(elements[index]);
       }
     }
 
-    return unique(results);
+    return unique(result);
   }
 
   /**
@@ -155,7 +155,7 @@
 
     if ((match = quick.exec(selector))) {
       if (match[1]) {
-        return unique(byId(context, match[1]));
+        return byId(context, match[1]);
       } else if (match[2]) {
         return byClass(context, match[2]);
       } else if (match[3]) {
