@@ -26,11 +26,11 @@
       "android-browser/4.2",
       "chrome/25..latest",
       "firefox/20..latest",
-      "ie/9..latest",
+      "ie/8..latest",
       "ipad/6",
       "iphone/6",
-      "opera/11..latest",
-      "safari/6..latest"
+      "opera/10..latest",
+      "safari/5..latest"
     ],
     "html": "tests/index.html"
   },
