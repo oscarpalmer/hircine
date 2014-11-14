@@ -1,7 +1,6 @@
 {
   "description": "A selector engine.",
   "ignore": [
-    "tests/",
     "src/ender.js",
     "Gruntfile.js",
     "LICENSE",
@@ -10,5 +9,5 @@
   ],
   "main": "dist/hircine.js",
   "name": "hircine",
-  "version": "0.8.1"
+  "version": "0.9.0"
 }

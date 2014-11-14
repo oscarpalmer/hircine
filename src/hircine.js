@@ -9,8 +9,34 @@
 })("hircine", this, function(){
   var
   doc   = this.document,
-  array = [],
   quick = /^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/;
+
+
+  /**
+   * Get elements by class name.
+   */
+  function byClass(context, klass) {
+    var
+    index  = 0,
+    result = [],
+    elements,
+    langd;
+
+    if (context.getElementsByClassName) {
+      return unique(context.getElementsByClassName(klass));
+    }
+
+    elements = context.getElementsByTagName("*");
+    langd = elements.length;
+
+    for (; index < langd; index++) {
+      if (elements[index].className.match(new RegExp("(^|\\s)" + klass + "(\\s|$)"))) {
+        results.push(elements[index]);
+      }
+    }
+
+    return unique(results);
+  }
 
   /**
    * Get element by ID.
@@ -41,6 +67,23 @@
   }
 
   /**
+   * Check if item exists in array.
+   */
+  function inArray(array, item) {
+    var
+    index = 0,
+    langd = array.length;
+
+    for (; index < langd; index++) {
+      if (array[index] == item) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Check if object is a node.
    */
   function isNodeLike(obj) {
@@ -57,15 +100,17 @@
   /**
    * Create a nice unique array from an existing one.
    */
-  function toArray(obj) {
+  function unique(obj) {
     var
+    index  = 0,
+    langd  = obj.length,
     result = [];
 
-    array.forEach.call(obj, function(item) {
-      if (result.indexOf(item) === -1) {
-        result.push(item);
+    for (; index < langd; index++) {
+      if (inArray(result, obj[index]) === false) {
+        result.push(obj[index]);
       }
-    });
+    }
 
     return result;
   }
@@ -79,6 +124,8 @@
    */
   function hircine(selector, context) {
     var
+    index,
+    langd,
     match,
     result;
 
@@ -95,28 +142,32 @@
     if (likeArray(context)) {
       result = [];
 
-      [].forEach.call(context, function(node) {
-        result = result.concat(hircine(selector, node));
-      });
+      for (index = 0, langd = context.length; index < langd; index++) {
+        result = result.concat(hircine(selector, context[index]));
+      }
 
-      return result;
+      return unique(result);
     }
 
-    if (typeof selector !== "string" || !isNodeLike(context)) {
+    if (typeof selector !== "string" || isNodeLike(context) === false) {
       return [];
     }
 
     if ((match = quick.exec(selector))) {
       if (match[1]) {
-        return toArray(byId(context, match[1]));
+        return unique(byId(context, match[1]));
       } else if (match[2]) {
-        return toArray(context.getElementsByClassName(match[2]));
+        return byClass(context, match[2]);
       } else if (match[3]) {
-        return toArray(context.getElementsByTagName(match[3]));
+        return unique(context.getElementsByTagName(match[3]));
       }
     }
 
-    return toArray(context.querySelectorAll(selector));
+    if (context.querySelectorAll) {
+      return unique(context.querySelectorAll(selector));
+    }
+
+    return [];
   }
 
   return hircine;

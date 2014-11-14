@@ -23,12 +23,6 @@ elements = hircine("tag#id.class");
 // elements is now a clean array of nodes matching your query
 ```
 
-Hircine is however less capable – it's just for fun and learning – and won't be able to handle super-crazy queries. Please check the [documentation for `querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document.querySelectorAll) if you want to know more.
-
-## Browser support
-
-[![Testling](https://ci.testling.com/oscarpalmer/hircine.png)](https://ci.testling.com/oscarpalmer/hircine)
-
 ## License
 
 MIT Licensed; see the [LICENSE file](LICENSE) for more info.
