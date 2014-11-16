@@ -13,32 +13,6 @@
 
 
   /**
-   * Get elements by class name.
-   */
-  function byClass(context, klass) {
-    var
-    index  = 0,
-    result = [],
-    elements,
-    langd;
-
-    if (context.getElementsByClassName) {
-      return unique(context.getElementsByClassName(klass));
-    }
-
-    elements = context.getElementsByTagName("*");
-    langd = elements.length;
-
-    for (; index < langd; index++) {
-      if (elements[index].className.match(new RegExp("(^|\\s)" + klass + "(\\s|$)"))) {
-        result.push(elements[index]);
-      }
-    }
-
-    return unique(result);
-  }
-
-  /**
    * Get element by ID.
    */
   function byId(context, id) {
@@ -67,23 +41,6 @@
   }
 
   /**
-   * Check if item exists in array.
-   */
-  function inArray(array, item) {
-    var
-    index = 0,
-    langd = array.length;
-
-    for (; index < langd; index++) {
-      if (array[index] == item) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
    * Check if object is a node.
    */
   function isNodeLike(obj) {
@@ -107,7 +64,7 @@
     result = [];
 
     for (; index < langd; index++) {
-      if (inArray(result, obj[index]) === false) {
+      if (result.indexOf(obj[index]) === -1) {
         result.push(obj[index]);
       }
     }
@@ -157,7 +114,7 @@
       if (match[1]) {
         return byId(context, match[1]);
       } else if (match[2]) {
-        return byClass(context, match[2]);
+        return unique(context.getElementsByClassName(match[2]));
       } else if (match[3]) {
         return unique(context.getElementsByTagName(match[3]));
       }
