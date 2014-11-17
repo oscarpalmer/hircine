@@ -124,10 +124,6 @@
       return [];
     }
 
-    if (html.test(selector)) {
-      return htmlify(selector);
-    }
-
     if ((match = quick.exec(selector))) {
       if (match[1]) {
         return byId(context, match[1]);
@@ -136,6 +132,10 @@
       } else if (match[3]) {
         return unique(context.getElementsByTagName(match[3]));
       }
+    }
+
+    if (html.test(selector)) {
+      return htmlify(selector);
     }
 
     if (context.querySelectorAll) {
