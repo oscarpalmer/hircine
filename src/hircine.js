@@ -9,6 +9,7 @@
 })("hircine", this, function(){
   var
   doc   = this.document,
+  html  = /^\s*<([^\s>]+)/,
   quick = /^(?:\w*\#([\w\-]+)|\.([\w\-]+)|(\w+))$/;
 
 
@@ -38,6 +39,19 @@
     }
 
     return doc;
+  }
+
+  /**
+   * Convert string to actual HTML.
+   */
+  function htmlify(string) {
+    var
+    div;
+
+    div = doc.createElement("div");
+    div.innerHTML = string;
+
+    return [].slice.call(div.childNodes);
   }
 
   /**
@@ -108,6 +122,10 @@
 
     if (typeof selector !== "string" || isNodeLike(context) === false) {
       return [];
+    }
+
+    if (html.test(selector)) {
+      return htmlify(selector);
     }
 
     if ((match = quick.exec(selector))) {
