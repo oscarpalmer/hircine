@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/hircine.png)](http://badge.fury.io/js/hircine)
 
-A tiny selector engine for [awesome browsers](#browser-support).
+A tiny selector engine. Hircine is no longer being developed or maintained.
 
 ## The name
 
